@@ -2,51 +2,76 @@
 
 @plugin 'tailwindcss-animate';
 
-@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+@extend .animate-spin {
+  @apply animate-spin;
+}
 
 .logo-title {
   @apply text-3xl sm:text-4xl md:text-5xl lg:text-[80px] pb-4;
 }
 .logo-title-one {
-  @apply text-[#0f172a] dark:text-[#f8f9fa] pr-2;
+  @apply text-[#0f172a] pr-2;
 }
 .logo-title-two {
   @apply text-[var(--main-sites-color)] pl-2;
 }
 
 .header-borders {
-  @apply border-t-2 border-b-2  border-[#0f172a] dark:border-[#f8f9fa];
+  @apply border-t-2 border-b-2  border-[#0f172a] ;
 }
 
 .btn {
   @apply w-[200px] h-[50px];
 }
 
-.btn {
-  @apply w-[75px] h-[50px];
-}
+
 
 .nav-info-bar {
   @apply flex  justify-between h-6 sm:h-8 md:h-10 lg:h-12 z-[100] mb-[15px];
 }
 
 .today-date-display {
-  @apply text-lg text-[#0f172a] dark:text-[#f8f9fa] pl-4 pr-6 mt-2;
+  @apply text-lg text-[#0f172a]  pl-4 pr-6 mt-2;
 }
 
-.dark-mode-icon {
-  @apply w-6 h-6 pr-4 text-[#0f172a] dark:text-[#f8f9fa];
+
+
+.game-info-btn {
+  @apply bg-[#bc3c3c] hover:bg-[#a44138] text-white 
+  lg:w-[90px]  md:w-[80px] sm:w-[70px]
+  lg:h-[60px] md:h-[50px] sm:h-[45px] ;
+}
+
+.game-over-btn {
+  @apply bg-[#bc3c3c] hover:bg-[#a44138] text-white 
+  w-[100px] sm:w-[150px] md:w-[200px] 
+  h-[40px] sm:h-[45px] md:h-[50px];
+  
+}
+
+.game-popup-screen {
+  @apply text-6xl bg-slate-800 z-10 border shadow-lg border-black p-10 rounded-xl absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 
+  w-[450px] h-[450px] text-center content-center text-white ;
+}
+.boardScreen {
+  @apply   
+  lg:w-[768px] lg:h-[768px] 
+  md:w-[480px] md:h-[480px]
+  sm:w-[320px] sm:h-[320px] ;
+}
+
+.cell-items {
+  @apply select-none flex items-center justify-center cursor-pointer border  
+  lg:w-[82px] lg:h-[82px] 
+  md:w-[42px] md:h-[42px] 
+  sm:w-[32px] sm:h-[32px] 
+  hover:border-[3px] rounded-md hover:border-[var(--main-sites-color)] ;
 }
 
 .main-background {
-  @apply bg-[#f0f2f5] dark:bg-[#2a2a38] text-[#0f172a] dark:text-[#f8f9fa];
+  @apply bg-[#f0f2f5]  text-[#0f172a] ;
 }
 
-.game-info-btn {
-  @apply bg-[#bc3c3c] hover:bg-[#a44138] text-white dark:text-white 
-  w-[60px] sm:w-[70px] md:w-[80px] 
-  h-[40px] sm:h-[45px] md:h-[50px];
-}
 
 :root {
   --main-sites-color: #bc3c3c;
@@ -57,7 +82,7 @@
 
   --card: hsl(0 0% 100%);
 
-  --card-foreground: hsl(240 10% 3.9%);
+  --card-foreground: #09090b;
 
   --popover: hsl(0 0% 100%);
 
@@ -139,7 +164,7 @@
 
   --input: hsl(240 3.7% 15.9%);
 
-  --ring: hsl(240 4.9% 83.9%);
+  --ring: #d4d4d8;
 
   --chart-1: hsl(220 70% 50%);
 
@@ -215,6 +240,25 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background;
+  }
+}
+
+.cell-err {
+  animation: zoom-out-shake 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes zoom-out-shake {
+  0% {
+      transform: scale(2);
+  }
+  25% {
+      transform: scale(2) rotate(30deg);
+  }
+  50% {
+      transform: scale(2) rotate(-30deg);
+  }
+  100% {
+      transform: scale(1);
   }
 }

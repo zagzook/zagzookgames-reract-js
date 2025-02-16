@@ -1,30 +1,29 @@
+import { useNavigate } from 'react-router-dom'
 import Board from '../Board/Board'
-import { Button } from '../ui/button'
+import useGameStore from '@/stores/GameStore/GameStore'
+import { useEffect, useRef } from 'react'
 
 const Game = () => {
+  const navagate = useNavigate()
+  const timeRef = useRef()
+  const { increaseTime, isStart, isPause, isCompleted } = useGameStore()
+
+  useEffect(() => {
+    if (!isStart) {
+      navagate('/')
+    }
+
+    timeRef.current = setInterval(() => {
+      if (!isPause && !isCompleted) increaseTime()
+    }, 1000)
+    return () => {
+      clearInterval(timeRef.current)
+    }
+  }, [isPause, isCompleted, isStart, increaseTime, navagate])
+
   return (
-    <div className="flex flex-col items-center my-5 gap-2">
-      <div id="heading" className="text-3xl font-bold mb-5">
-        Zagzook Games Sudoku
-      </div>
+    <div className="flex flex-col items-center my-2 gap-2 z-10">
       <Board />
-      <div className="flex items-center w-full justify-around gap-2">
-        <Button className="game-info-btn active:scale-90">
-          <i className="bx bx-log-out bx-rotate-180 bx-md"></i>
-        </Button>
-        <Button className="game-info-btn active:scale-90">
-          <i className="bx bx-pause bx-md"></i>
-        </Button>
-        <Button className="game-info-btn active:scale-90">
-          <i className="bx bx-rotate-left bx-md"></i>
-        </Button>
-        <Button className="game-info-btn active:scale-90">
-          <i className="bx bx-edit-alt bx-md"></i>
-        </Button>
-        <Button className="game-info-btn active:scale-90">
-          <i className="bx bx-bulb bx-md"></i>
-        </Button>
-      </div>
     </div>
   )
 }

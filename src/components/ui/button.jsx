@@ -19,6 +19,8 @@ const buttonVariants = cva(
           'bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80',
         ghost: 'hover:bg-accent hover:text-accent-foreground',
         link: 'text-primary underline-offset-4 hover:underline',
+        sitebutton:
+          'bg-[#bc3c3c] hover:bg-[#a44138] text-white lg:w-[80px] sm:w-[60px] md:w-[70px] lg:h-[50px] sm:h-[40px] md:h-[45px]',
       },
       size: {
         default: 'h-9 px-4 py-2',
